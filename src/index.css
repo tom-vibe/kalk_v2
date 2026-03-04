@@ -12,37 +12,85 @@
 }
 
 @layer base {
-  /* Podstawowe style dla body: ciemne tło i jasny tekst */
   body {
-    @apply bg-[#0a0a0a] text-zinc-100 antialiased;
-    background-image: url('./assets/IT-green-screen.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    @apply antialiased transition-colors duration-300;
   }
+}
+
+.theme-default {
+  @apply bg-[#0a0a0a] text-zinc-100;
+  background-image: url('./assets/IT-green-screen.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.theme-light {
+  @apply bg-zinc-50 text-zinc-900;
+}
+
+.theme-dark {
+  @apply bg-zinc-950 text-zinc-200;
+}
+
+.theme-contrast {
+  @apply bg-black text-yellow-400;
 }
 
 /* Klasa dla kart z efektem "szkła" (glassmorphism) */
 .glass-card {
-  @apply bg-zinc-900/50 border border-zinc-800 backdrop-blur-md rounded-2xl;
+  @apply backdrop-blur-md rounded-2xl border transition-colors duration-300;
+}
+
+.theme-default .glass-card {
+  @apply bg-zinc-900/50 border-zinc-800;
+}
+.theme-light .glass-card {
+  @apply bg-white/80 border-zinc-200 text-zinc-900;
+}
+.theme-dark .glass-card {
+  @apply bg-zinc-900 border-zinc-700;
+}
+.theme-contrast .glass-card {
+  @apply bg-black border-yellow-400;
 }
 
 /* Klasa dla pól wprowadzania danych */
 .input-field {
-  @apply w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all;
+  @apply w-full rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all;
+}
+
+.theme-default .input-field {
+  @apply bg-zinc-950 border border-zinc-800 text-zinc-100;
+}
+.theme-light .input-field {
+  @apply bg-zinc-100 border border-zinc-300 text-zinc-900;
+}
+.theme-dark .input-field {
+  @apply bg-zinc-900 border border-zinc-700 text-zinc-200;
+}
+.theme-contrast .input-field {
+  @apply bg-black border border-yellow-400 text-yellow-400;
 }
 
 /* Klasa dla etykiet pól formularza */
 .label-text {
-  @apply text-xs font-medium uppercase tracking-wider text-zinc-500 mb-1.5 block;
+  @apply text-sm font-medium uppercase tracking-wider mb-1.5 block transition-colors duration-300;
 }
 
-/* Ukrywanie natywnych strzałek (spinnerów) w polach typu number */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.theme-default .label-text { @apply text-zinc-300; }
+.theme-light .label-text { @apply text-zinc-600; }
+.theme-dark .label-text { @apply text-zinc-400; }
+.theme-contrast .label-text { @apply text-yellow-500; }
+
+.text-analysis-subtitle {
+  @apply transition-colors duration-300;
 }
+
+.theme-default .text-analysis-subtitle { @apply text-zinc-300; }
+.theme-light .text-analysis-subtitle { @apply text-zinc-700; }
+.theme-dark .text-analysis-subtitle { @apply text-zinc-300; }
+.theme-contrast .text-analysis-subtitle { @apply text-yellow-400; }
 
 input[type="number"] {
   -moz-appearance: textfield;

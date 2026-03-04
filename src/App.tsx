@@ -103,6 +103,7 @@ export default function App() {
   const [fixedCosts, setFixedCosts] = useState<number>(3000);
   const [itemPrice, setItemPrice] = useState<number>(1200);
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
+  const [theme, setTheme] = useState<'default' | 'light' | 'dark' | 'contrast'>('default');
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -171,35 +172,60 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen p-4 md:p-8 lg:p-12 max-w-6xl mx-auto">
-      {/* Nagłówek aplikacji */}
-      <header className="mb-12 text-center md:text-left flex items-center justify-between">
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium mb-4"
-          >
-            <Zap size={14} />
-            <span>Świadome kupowanie</span>
-          </motion.div>
-          <motion.h1 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold tracking-tight mb-4"
-          >
-            Ile mnie to kosztuje <span className="text-emerald-500 italic">pracy?</span>
-          </motion.h1>
-        </div>
-        <button 
-          onClick={toggleAudio}
-          className="p-3 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-emerald-400 transition-colors border border-zinc-700/50"
-        >
-          {isAudioPlaying ? <VolumeX size={20} /> : <Volume2 size={20} />}
-        </button>
-      </header>
+    <div className={`min-h-screen theme-${theme} transition-colors duration-300`}>
+      <div className="p-4 md:p-8 lg:p-12 max-w-6xl mx-auto">
+        {/* Nagłówek aplikacji */}
+        <header className="mb-12 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium mb-4"
+            >
+              <Zap size={14} />
+              <span>Świadome kupowanie</span>
+            </motion.div>
+            <motion.h1 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-bold tracking-tight mb-4"
+            >
+              Ile mnie to kosztuje <span className="text-emerald-500 italic">pracy?</span>
+            </motion.h1>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <div className="flex gap-1 p-1 rounded-lg bg-zinc-900/50 border border-zinc-800">
+              {[
+                { id: 'default', label: 'Domyślny' },
+                { id: 'light', label: 'Jasny' },
+                { id: 'dark', label: 'Ciemny' },
+                { id: 'contrast', label: 'Kontrast' },
+              ].map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => setTheme(t.id as any)}
+                  className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                    theme === t.id 
+                      ? 'bg-emerald-500 text-white' 
+                      : 'text-zinc-400 hover:text-zinc-200'
+                  }`}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+            <button 
+              onClick={toggleAudio}
+              className="p-3 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-emerald-400 transition-colors border border-zinc-700/50"
+            >
+              {isAudioPlaying ? <VolumeX size={20} /> : <Volume2 size={20} />}
+            </button>
+          </div>
+        </header>
 
+      </div>
       <div className="grid lg:grid-cols-12 gap-8">
         {/* Sekcja formularza - wprowadzanie danych */}
         <motion.div 
@@ -325,7 +351,7 @@ export default function App() {
             <div className="flex justify-between items-start mb-12">
               <div>
                 <h2 className="text-2xl font-bold mb-1">Wynik analizy</h2>
-                <p className="text-zinc-500">Koszt zakupu wyrażony w czasie</p>
+                <p className="text-analysis-subtitle">Koszt zakupu wyrażony w czasie</p>
               </div>
               <div className="text-right">
                 <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest">Wartość</p>
@@ -501,7 +527,7 @@ export default function App() {
                     }`}
                   />
                 </div>
-                <p className="text-xs text-zinc-500 mt-3">
+                <p className="text-sm text-zinc-500 mt-3">
                   Ten zakup pochłonie <span className="text-zinc-300 font-medium">{stats.percentageOfSavings.toFixed(1)}%</span> Twoich miesięcznych oszczędności.
                 </p>
               </div>
