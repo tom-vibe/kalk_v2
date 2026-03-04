@@ -1,0 +1,49 @@
+/**
+ * @file index.css
+ * @description Globalny arkusz stylów aplikacji.
+ * Definiuje motyw Tailwind CSS, czcionki oraz niestandardowe klasy narzędziowe.
+ */
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  /* Podstawowe style dla body: ciemne tło i jasny tekst */
+  body {
+    @apply bg-[#0a0a0a] text-zinc-100 antialiased;
+    background-image: url('./assets/IT-green-screen.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+}
+
+/* Klasa dla kart z efektem "szkła" (glassmorphism) */
+.glass-card {
+  @apply bg-zinc-900/50 border border-zinc-800 backdrop-blur-md rounded-2xl;
+}
+
+/* Klasa dla pól wprowadzania danych */
+.input-field {
+  @apply w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all;
+}
+
+/* Klasa dla etykiet pól formularza */
+.label-text {
+  @apply text-xs font-medium uppercase tracking-wider text-zinc-500 mb-1.5 block;
+}
+
+/* Ukrywanie natywnych strzałek (spinnerów) w polach typu number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

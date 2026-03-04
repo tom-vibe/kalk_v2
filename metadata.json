@@ -1,0 +1,5 @@
+{
+  "name": "Remix: Ile mnie to kosztuje pracy?",
+  "description": "Aplikacja do przeliczania ceny przedmiotów na czas pracy, pomagająca w świadomym kupowaniu.",
+  "requestFramePermissions": []
+}
