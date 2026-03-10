@@ -21,7 +21,7 @@ import {
   Volume2,
   VolumeX
 } from 'lucide-react';
-import backgroundAudioFile from './assets/Breath In Slow Waves.mp3';
+import backgroundAudioFile from '/Breath In Slow Waves.mp3';
 
 /**
  * Komponent przycisku z obsługą długiego naciśnięcia.

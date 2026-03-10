@@ -19,7 +19,7 @@
 
 .theme-default {
   @apply bg-[#0a0a0a] text-zinc-100;
-  background-image: url('./assets/IT-green-screen.png');
+  background-image: url('/IT-green-screen.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
